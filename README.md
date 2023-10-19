@@ -1,17 +1,18 @@
-Задание “Автомойка”
-Создайте класс
-Car
+## Задание “Автомойка”
+
+Создайте класс 
+car.Car
 Поле dirtiness, которое определяет, на сколько машина грязная
 конструктор
 Геттер и сеттер
-CarOwner
+car.CarOwner
 Два воля
 Имя
 Баланс
 Конструктор
 Геттер и сеттер
-NegativeBalanceException - наследует от RuntimeException
-BlackListedException - наследует от RuntimeException
+exceptions.NegativeBalanceException - наследует от RuntimeException
+exceptions.BlackListedException - наследует от RuntimeException
 WashStrategy
 Interface
 методы
