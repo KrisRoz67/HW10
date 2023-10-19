@@ -44,8 +44,8 @@ public class CarWashService {
             return false;
         }
         washStrategy.wash(car,carOwner);
-       totalWashes++;
-        moneyEarned ++;
+        totalWashes++;
+        moneyEarned= moneyEarned + washStrategy.getPrice(true);
         return true;
 
    }
@@ -58,7 +58,7 @@ public class CarWashService {
         }
         washStrategy.WashAndDry(car,carOwner);
         totalWashes++;
-        moneyEarned ++;
+        moneyEarned= moneyEarned + washStrategy.getPrice(true);
         return true;
 
     }

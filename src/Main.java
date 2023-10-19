@@ -8,8 +8,8 @@ public class Main {
         RegularWash regularWash = new RegularWash();
         PremiumWash premiumWash = new PremiumWash();
         CarWashService carWashService = new CarWashService(cheapWash);
-        CarWashService carWashService2 = new CarWashService(new RegularWash());
-        CarWashService carWashService3 = new CarWashService(new PremiumWash());
+        CarWashService carWashService2 = new CarWashService(regularWash);
+        CarWashService carWashService3 = new CarWashService(premiumWash);
         Car car1 = new Car(123);
         CarOwner car1Owner = new CarOwner(145, "Oleg");
         Car car2 = new Car(20);
@@ -18,19 +18,25 @@ public class Main {
         CarOwner car3Owner = new CarOwner(100, "Petja");
         System.out.println("--------------");
         printbeforeInfo(car1, car1Owner);
-        carWashService.wash(car1, car1Owner);
+        if(carWashService.wash(car1, car1Owner)){
         printafterInfo(car1, car1Owner, cheapWash, true);
+        }
         System.out.println("--------------");
         printbeforeInfo(car2, car2Owner);
-        carWashService.dry(car2, car2Owner);
-        printafterInfo(car2, car2Owner, regularWash, false);
+        if (carWashService.dry(car2, car2Owner)) {
+            printafterInfo(car2, car2Owner, regularWash, false);
+        }
         System.out.println("--------------");
         printbeforeInfo(car3, car3Owner);
-        carWashService.wash(car3, car3Owner);
-        printafterInfo(car3, car3Owner, premiumWash, true);
+        if(carWashService.wash(car3, car3Owner)) {
+            printafterInfo(car3, car3Owner, premiumWash, true);
+        }
         carWashService.addClientToBlackListed(car1Owner);
         System.out.println("--------------");
-        carWashService.wash(car1, car1Owner);
+        if(carWashService.wash(car1, car1Owner)){
+            printafterInfo(car1, car1Owner, cheapWash, true);
+        }
+
     }
 
     public static void printbeforeInfo(Car car, CarOwner carOwner) {
