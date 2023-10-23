@@ -9,6 +9,6 @@ public interface WashStrategy {
 
     int getPrice(boolean isWashOrDry);
 
-    void WashAndDry(Car car, CarOwner carOwner);
+    void washAndDry(Car car, CarOwner carOwner);
 
 }

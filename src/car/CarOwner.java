@@ -21,8 +21,7 @@ public class CarOwner {
     }
 
 
-
-    public CarOwner(double balance, String name){
+    public CarOwner(double balance, String name) {
         this.balance = balance;
         this.name = name;
     }

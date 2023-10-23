@@ -7,46 +7,55 @@ public class Main {
         CheapWash cheapWash = new CheapWash();
         RegularWash regularWash = new RegularWash();
         PremiumWash premiumWash = new PremiumWash();
-        CarWashService carWashService = new CarWashService(cheapWash);
-        CarWashService carWashService2 = new CarWashService(regularWash);
-        CarWashService carWashService3 = new CarWashService(premiumWash);
+        CarWashService carWashService = new CarWashService();
         Car car1 = new Car(123);
-        CarOwner car1Owner = new CarOwner(145, "Oleg");
+        CarOwner car1Owner = new CarOwner(59, "Oleg");
         Car car2 = new Car(20);
         CarOwner car2Owner = new CarOwner(100, "Vasja");
         Car car3 = new Car(90);
         CarOwner car3Owner = new CarOwner(100, "Petja");
         System.out.println("--------------");
-        printbeforeInfo(car1, car1Owner);
-        if(carWashService.wash(car1, car1Owner)){
-        printafterInfo(car1, car1Owner, cheapWash, true);
+        printBeforeInfo(car1, car1Owner);
+        carWashService.setWashStrategy(cheapWash);
+        if (carWashService.wash(car1, car1Owner)) {
+            printAfterInfo(car1, car1Owner, cheapWash, true);
         }
         System.out.println("--------------");
-        printbeforeInfo(car2, car2Owner);
+        if (carWashService.wash(car1, car1Owner)) {
+            printAfterInfo(car1, car1Owner, cheapWash, true);
+        }
+        System.out.println("--------------");
+        System.out.println("--------------");
+        carWashService.setWashStrategy(regularWash);
+        printBeforeInfo(car2, car2Owner);
         if (carWashService.dry(car2, car2Owner)) {
-            printafterInfo(car2, car2Owner, regularWash, false);
+            printAfterInfo(car2, car2Owner, regularWash, false);
         }
         System.out.println("--------------");
-        printbeforeInfo(car3, car3Owner);
-        if(carWashService.wash(car3, car3Owner)) {
-            printafterInfo(car3, car3Owner, premiumWash, true);
+        System.out.println("--------------");
+        carWashService.setWashStrategy(premiumWash);
+        printBeforeInfo(car3, car3Owner);
+        if (carWashService.wash(car3, car3Owner)) {
+            printAfterInfo(car3, car3Owner, premiumWash, true);
         }
+        System.out.println("--------------");
+        System.out.printf("\nOrdered services so far : %s.\nAnd earned money : %s eur\n",
+                carWashService.getTotalWashes(), carWashService.getMoneyEarned());
         carWashService.addClientToBlackListed(car1Owner);
         System.out.println("--------------");
-        if(carWashService.wash(car1, car1Owner)){
-            printafterInfo(car1, car1Owner, cheapWash, true);
+        System.out.println("--------------");
+        if (carWashService.wash(car1, car1Owner)) {
+            printAfterInfo(car1, car1Owner, cheapWash, true);
         }
 
     }
 
-    public static void printbeforeInfo(Car car, CarOwner carOwner) {
-        System.out.printf("""
-                Client is %s .
-                Client start balance : %s eur. Current car  dirtness before wash : %s
-                """, carOwner.getName(), carOwner.getBalance(), car.getDirtness());
+    public static void printBeforeInfo(Car car, CarOwner carOwner) {
+        System.out.printf("Client start balance : %s eur. Current car  dirtness before wash : %s ",
+                carOwner.getBalance(), car.getDirtness());
     }
 
-    public static void printafterInfo(Car car, CarOwner carOwner, WashStrategy washStrategy, boolean isOnlywashOrDry) {
+    public static void printAfterInfo(Car car, CarOwner carOwner, WashStrategy washStrategy, boolean isOnlywashOrDry) {
         System.out.println(isOnlywashOrDry ? "You ordered only wash " : "You ordered dry and wash");
         if (washStrategy instanceof CheapWash) {
             System.out.printf("You have choosen cheap service. The service price is " +

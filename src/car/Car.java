@@ -2,9 +2,10 @@ package car;
 
 public class Car {
 
-    int dirtness ;
+    private int dirtness;
 
     public int getDirtness() {
+
         return dirtness;
     }
 
@@ -13,7 +14,7 @@ public class Car {
     }
 
 
-    public Car(int dirtness){
+    public Car(int dirtness) {
         this.dirtness = dirtness;
 
     }
